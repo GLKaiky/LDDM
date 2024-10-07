@@ -4,7 +4,7 @@ lib/<br>
 ├── models/         
 ├── services/      
 ├── controllers/   
-├── views/
+├── views/<br>
 │   ├── screens/<br>
 │   │   ├── cadastro.dart <br>
 │   │   ├── globo.dart <br>
