@@ -1,19 +1,19 @@
 ## Organização das Pastas
     
-lib/
-├── models/             
-├── services/           
-├── controllers/        
-├── views/
-│   ├── screens/
-│   │   ├── cadastro.dart
-│   │   ├── globo.dart
-│   │   ├── home.dart
-│   │   ├── login.dart
-│   │   └── perfil.dart
-│   ├── widgets/
-│   │   └── loadingInterface.dart
-├── utils/
-├── themes/
-├── routes/
-└── main.dart           
+lib/ <br>
+├── models/ <br>            
+├── services/   <br>        
+├── controllers/    <br>    
+├── views/<br>
+│   ├── screens/<br>
+│   │   ├── cadastro.dart <br>
+│   │   ├── globo.dart <br>
+│   │   ├── home.dart <br>
+│   │   ├── login.dart <br>
+│   │   └── perfil.dart <br>
+│   ├── widgets/ <br>
+│   │   └── loadingInterface.dart <br>
+├── utils/ <br>
+├── themes/ <br>
+├── routes/ <br>
+└── main.dart   <br>        
