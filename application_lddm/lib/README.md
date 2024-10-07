@@ -1,10 +1,10 @@
 ## Organização das Pastas
     
-lib/ <br>
-├── models/ <br>            
-├── services/   <br>        
-├── controllers/    <br>    
-├── views/<br>
+lib/ 
+├── models/          
+├── services/         
+├── controllers/     
+├── views/
 │   ├── screens/<br>
 │   │   ├── cadastro.dart <br>
 │   │   ├── globo.dart <br>
@@ -13,7 +13,7 @@ lib/ <br>
 │   │   └── perfil.dart <br>
 │   ├── widgets/ <br>
 │   │   └── loadingInterface.dart <br>
-├── utils/ <br>
-├── themes/ <br>
-├── routes/ <br>
-└── main.dart   <br>        
+├── utils/
+├── themes/
+├── routes/ 
+└── main.dart  
