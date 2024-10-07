@@ -1,9 +1,9 @@
 ## Organização das Pastas
     
 lib/<br> 
-├── models/<br>          
-├── services/<br>         
-├── controllers/<br>     
+├── models/         
+├── services/      
+├── controllers/   
 ├── views/
 │   ├── screens/<br>
 │   │   ├── cadastro.dart <br>
