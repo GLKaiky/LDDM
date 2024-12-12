@@ -1,6 +1,8 @@
 import 'package:application_lddm/views/screens/home.dart';
+import 'package:application_lddm/views/screens/traducao.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'camera.dart';
 import 'globo.dart';
 import 'login.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:application_lddm/entitis/userProviders.dart';
 
 class UserProfileScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     // Obtendo as informações do usuário do UserProvider
@@ -130,46 +133,40 @@ class UserProfileScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            label: 'País',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.language), label: 'País'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Chat'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+          BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'Camera'),
+          BottomNavigationBarItem(icon: Icon(Icons.text_fields), label: 'Tradução'),
         ],
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            // Navegação para a tela de países
             Navigator.push(
               context,
-              PageTransition(
-                child:
-                    CountryLanguageScreen(), // Altere para a tela correspondente
-                type: PageTransitionType.leftToRight,
-              ),
+              PageTransition(child: CountryLanguageScreen(), type: PageTransitionType.leftToRight),
             );
           } else if (index == 1) {
-            // Navegação para a tela de chat
             Navigator.push(
               context,
-              PageTransition(
-                child: MyHomePage(), // Altere para a tela correspondente
-                type: PageTransitionType.leftToRight,
-              ),
+              MaterialPageRoute(builder: (context) => MyHomePage()),
             );
           } else if (index == 2) {
-            // Navegação para a tela de perfil (já está nesta tela)
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => UserProfileScreen()),
+              PageTransition(child: UserProfileScreen(), type: PageTransitionType.rightToLeft),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              PageTransition(child: CameraPage(), type: PageTransitionType.rightToLeft),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              PageTransition(child: Traducao(), type: PageTransitionType.rightToLeft),
             );
           }
         },

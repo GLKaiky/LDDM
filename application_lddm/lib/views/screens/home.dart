@@ -3,6 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'camera.dart';
 import 'globo.dart';
 import 'perfil.dart';
+import 'traducao.dart';
 import 'package:application_lddm/services/languages.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,9 +20,9 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> {    
   String? selectedLanguage; // Variável para armazenar o idioma selecionado
-  List<String> languages = []; // Lista para armazenar as línguas
+    List<String> languages = []; // Lista para armazenar as línguas
 
   @override
   void initState() {
@@ -32,29 +33,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> loadLanguages() async {
     languages = await fetchLanguages(); // Chama a função do outro arquivo
     setState(() {}); // Atualiza o estado para refletir a lista de idiomasdata
+
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      //AppBar
       appBar: AppBar(
         title: Text('WorldChat'),
       ),
-
-      //Corpo
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            //Containers
             Container(
               margin: EdgeInsets.symmetric(vertical: 10),
+
               child: DropdownButton<String>(
-                hint: Text('Selecione um idioma'), // Sugestão para o usuário
+                hint: Text('Selecione um idioma'),
                 value: selectedLanguage,
                 items: languages.map((String lang) {
                   return DropdownMenuItem<String>(
@@ -64,8 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
-                    selectedLanguage =
-                        newValue; // Atualiza o idioma selecionado
+                    selectedLanguage = newValue;
                   });
                 },
               ),
@@ -73,80 +70,54 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ElevatedButton(
               onPressed: () {
-                // Ação para o botão "Ativar"
                 print("Idioma selecionado: $selectedLanguage");
               },
               child: Text('Ativar'),
             ),
+
           ],
         ),
       ),
-
-      // Coloque o BottomNavigationBar aqui, dentro do Scaffold
       bottomNavigationBar: BottomNavigationBar(
-
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            label: 'País',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt),
-            label: 'Câmera',
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.language), label: 'País'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Chat'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+          BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'Camera'),
+          BottomNavigationBarItem(icon: Icon(Icons.text_fields), label: 'Tradução'),
         ],
-
-        currentIndex: 1, // Define a aba atual (1 é a aba Chat neste caso)
+        currentIndex: 1,
         onTap: (index) {
           if (index == 0) {
-            // Navegação para a tela de países
             Navigator.push(
               context,
-              PageTransition(
-                child:
-                    CountryLanguageScreen(), // Substitua pela sua tela de países
-                type: PageTransitionType.leftToRight,
-              ),
+              PageTransition(child: CountryLanguageScreen(), type: PageTransitionType.leftToRight),
             );
           } else if (index == 1) {
-            // Navegação para a tela de chat
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      MyHomePage()), // Substitua pela sua tela de chat
+              MaterialPageRoute(builder: (context) => MyHomePage()),
             );
           } else if (index == 2) {
-            // Navegação para a tela de câmera
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      CameraExample()), // Substitua pela sua tela de chat
+              PageTransition(child: UserProfileScreen(), type: PageTransitionType.rightToLeft),
             );
           } else if (index == 3) {
-            // Navegação para a tela de perfil
             Navigator.push(
               context,
-              PageTransition(
-                child: UserProfileScreen(), // Substitua pela sua tela de perfil
-                type: PageTransitionType.rightToLeft,
-              ),
+              PageTransition(child: CameraPage(), type: PageTransitionType.rightToLeft),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              PageTransition(child: Traducao(), type: PageTransitionType.rightToLeft),
             );
           }
         },
       ),
     );
+
   }
 }

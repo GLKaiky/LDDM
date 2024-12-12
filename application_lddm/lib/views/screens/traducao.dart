@@ -1,71 +1,67 @@
-import 'package:application_lddm/views/screens/traducao.dart';
+import 'package:application_lddm/views/screens/perfil.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'camera.dart';
+import 'globo.dart';
 import 'home.dart';
-import 'perfil.dart';
 
-class CountryLanguageScreen extends StatefulWidget {
+class Traducao extends StatefulWidget {
   @override
-  _CountryLanguageScreenState createState() => _CountryLanguageScreenState();
+  _Traducao createState() => _Traducao();
 }
 
-class _CountryLanguageScreenState extends State<CountryLanguageScreen> {
-  // Controladores para armazenar os valores inseridos no formulário
-  TextEditingController _countryController = TextEditingController();
-  TextEditingController _languageController = TextEditingController();
+class _Traducao extends State<Traducao> {
+
+  //Controle de texto
+  final TextEditingController _controller = TextEditingController();
+  String texto = '';
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('WorldChat'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Título da página
-            Text(
-              'Diga o país onde mora e sua língua.',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-
-            // Campo de texto para o país
             TextField(
-              controller: _countryController,
+              controller: _controller,
               decoration: InputDecoration(
                 labelText: 'País',
                 border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: Colors.blue),
               ),
             ),
-            SizedBox(height: 16),
-
-            // Campo de texto para a língua
-            TextField(
-              controller: _languageController,
-              decoration: InputDecoration(
-                labelText: 'Língua',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 32),
-
-            // Imagem do globo
+            SizedBox(height: 20),
             Center(
-              child: Image.asset(
-                'assets/globe.png', // API DO MAPA :(
-                height: 200,
-                width: 200,
+              child: ElevatedButton(
+                onPressed: _showText,
+                child: Text(
+                  'Mostrar Texto',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
-            Spacer(),
+            SizedBox(height: 10),
+            Center(
+              child: Text(
+                texto.isEmpty ? 'Texto não digitado ainda.' : texto,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
           ],
         ),
       ),
-      // Coloque o BottomNavigationBar aqui, dentro do Scaffold
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -75,7 +71,7 @@ class _CountryLanguageScreenState extends State<CountryLanguageScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'Camera'),
           BottomNavigationBarItem(icon: Icon(Icons.text_fields), label: 'Tradução'),
         ],
-        currentIndex: 0,
+        currentIndex: 4,
         onTap: (index) {
           if (index == 0) {
             Navigator.push(
@@ -106,5 +102,13 @@ class _CountryLanguageScreenState extends State<CountryLanguageScreen> {
         },
       ),
     );
+  }
+
+  //PASSANDO DO "_controller.text" PARA "texto". PARA TRADUÇÃO, TRADUZA O "_controller.text" PARA O "texto".
+  void _showText() {
+    setState(() {
+      texto = _controller.text;
+      texto = '${texto}abs';
+    });
   }
 }
